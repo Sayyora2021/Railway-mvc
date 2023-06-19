@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Railway.Core.Entities.Reservation>
+@using Railway.Core.Entities;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Exemplaire (buillet)
+            </th>
+            <th>
+                Passager
+            </th>
+            <th>
+                Date d'aller
+            </th>
+            <th>Date de retour</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Exemplaire.NumeroInventaire)
+                    --
+                    @Html.DisplayFor(modelItem => item.Exemplaire.Buillet.Titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passager.Nom)
+                </td>
+                <td>@item.DateAller.ToString()</td>
+
+                <td>@item.DateRetour.ToString()</td>
+                @if (item.DateModification == null)
+                {
+                    <td>
+                        <a asp-action="Modifier" asp-route-id="@item.Id">Modifier</a>
+                    </td>
+                }
+                else
+                {
+                    <td>@item.DateModification.ToString()</td>
+                }
+
+            </tr>
+}
+    </tbody>
+</table>

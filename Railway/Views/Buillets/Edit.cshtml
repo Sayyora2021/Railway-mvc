@@ -1,0 +1,68 @@
+﻿@using Railway.Core.Entities;
+@model Railway.Core.Entities.Buillet
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Buillet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titre" class="control-label"></label>
+                <input asp-for="Titre" class="form-control" />
+                <span asp-validation-for="Titre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Destinations" class="control-label"></label>
+                <select asp-for="Destinations">
+                    @foreach (Destination destination in ViewBag.Destinations)
+                    {
+                        <option selected="@Model.Destinations.Contains(destination)" value="@(destination.Id)">@(destination.Aller)</option>
+                    }
+                </select>
+                </div>
+            <div class="form-group">
+                <label asp-for="Exemplaires" asp-for="Exemplaires" class="control-label"></label>
+                <select asp-for="Exemplaires">
+                    @foreach (Exemplaire exemplaire in ViewBag.Exemplaires)
+                    {
+                        <option selected="@Model.Exemplaires.Contains(exemplaire)" value="@(exemplaire.Id)">@(exemplaire.NumeroInventaire)</option>
+                    }
+                </select>
+                </div>
+            <div class="form-group">
+                <label asp-for="Trains" asp-for="Trains" class="control-label"></label>
+                <select asp-for="Trains">
+                    @foreach (Train train in ViewBag.Trains)
+                    {
+                        <option selected="@Model.Trains.Contains(train)" value="@(train.Id)">@(train.Numero)</option>
+                    }
+                </select>
+            </div>
+            
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

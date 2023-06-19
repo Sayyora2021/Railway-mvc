@@ -1,0 +1,59 @@
+﻿@model Railway.Core.Entities.Buillet
+@using Railway.Core.Entities;
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Buillet</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Titre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Titre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Destinations)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (Destination destination in Model.Destinations)
+            {
+                <p>@destination.Aller @destination.Retour</p>
+               
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (Train train in Model.Trains)
+            {
+                <p>@train.Numero (@train.Nom)</p>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Exemplaires)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (Exemplaire exemplaire in Model.Exemplaires)
+            {
+                <p>@exemplaire.NumeroInventaire (@exemplaire.MiseEnService</p>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

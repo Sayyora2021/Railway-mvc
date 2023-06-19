@@ -1,0 +1,45 @@
+﻿@using Railway.Core.Entities;
+@model Railway.Core.Entities.Exemplaire
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Exemplaire</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumeroInventaire" class="control-label"></label>
+                <input asp-for="NumeroInventaire" class="form-control" />
+                <span asp-validation-for="NumeroInventaire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiseEnService" class="control-label"></label>
+                <input asp-for="MiseEnService" class="form-control" />
+                <span asp-validation-for="MiseEnService" class="text-danger"></span>
+            </div>
+            <input asp-for="MiseEnService" type="hidden" value="@DateTime.Now">
+            <input asp-for="Buillet" type="hidden" value="@(new Buillet())">
+            <div class="form-group">
+                <label asp-for="Buillet" class="control-label"></label>
+                <select name="builletId" asp-items="@(ViewBag.Buillets as SelectList)"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
