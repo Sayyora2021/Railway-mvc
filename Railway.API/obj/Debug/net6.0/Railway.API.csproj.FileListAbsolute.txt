@@ -273,5 +273,3 @@ C:\workspace\Railway-mvc\Railway.API\bin\Debug\net6.0\Railway.Core.dll
 C:\workspace\Railway-mvc\Railway.API\bin\Debug\net6.0\Railway.Infrastructure.dll
 C:\workspace\Railway-mvc\Railway.API\bin\Debug\net6.0\Railway.Core.pdb
 C:\workspace\Railway-mvc\Railway.API\bin\Debug\net6.0\Railway.Infrastructure.pdb
-C:\workspace\Railway-mvc\Railway.API\obj\Debug\net6.0\Railway.API.RazorAssemblyInfo.cache
-C:\workspace\Railway-mvc\Railway.API\obj\Debug\net6.0\Railway.API.RazorAssemblyInfo.cs

@@ -11,7 +11,7 @@ using System.Linq.Expressions;
             Task<Buillet> GetById(int id);
             Task<List<Buillet>> ListAll();
 
-            Task Update(Buillet buillet, int[] destinations, int[] exemplaire);
+            Task Update(Buillet buillet, int[] destinations, int[] train);
             Task Update(Buillet buillet);
 
             Task<bool> Exists(int id);

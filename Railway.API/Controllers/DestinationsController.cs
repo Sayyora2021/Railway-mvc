@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
-using Railway.Core.Entities;
+﻿using Railway.Core.Entities;
 using Railway.Core.Seedwork;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Railway.API.Controllers
 {
@@ -66,7 +66,7 @@ namespace Railway.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, Route ("Edit")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult<Destination>> Edit(int id, string aller, string retour)
         {
             Destination destination = new Destination()
@@ -102,7 +102,8 @@ namespace Railway.API.Controllers
             return BadRequest();
         }
 
-        // GET: Destinations/Delete/5
+        // POST: Destinations/Delete/5
+        [HttpDelete, Route("Delete/{id}")]
         public async Task<ActionResult<Destination>> DeleteConfirmed(int id)
         {
             if (await Repository.IsEmpty())

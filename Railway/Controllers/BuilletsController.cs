@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Railway.Core.Entities;
 using Railway.Core.Seedwork;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Railway.Infrastructure.Data;
 using System.Linq;
 
@@ -31,7 +32,7 @@ namespace Railway.Controllers
             {
                 ViewBag.Trains = new SelectList(await TrainRepository.ListAll(), nameof(Train.Id), nameof(Train.Nom));
                 ViewBag.Destinations = new SelectList(await DestinationRepository.ListAll(), nameof(Destination.Id), nameof(Destination.Aller), nameof(Destination.Retour));
-               // ViewBag.Exemplaire = new SelectList(await ExemplaireRepository.ListAll(), nameof(Exemplaire.Id), nameof(Exemplaire.NumeroInventaire));
+               ViewBag.Exemplaire = new SelectList(await ExemplaireRepository.ListAll(), nameof(Exemplaire.Id), nameof(Exemplaire.NumeroInventaire));
             }
         }
 
@@ -39,7 +40,7 @@ namespace Railway.Controllers
         // GET: Buillets
         public async Task<IActionResult> Index()
         {
-            return !await BuilletRepository.IsEmpty()?
+            return ! await BuilletRepository.IsEmpty()?
                         View(await BuilletRepository.ListAll()) :
                         Problem("Entity set 'RailwayContext.Buillets'  is null.");
         }
@@ -74,12 +75,13 @@ namespace Railway.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Buillet buillet, int[] trains, int[] destinations, int[] exemplaire)
+        public async Task<IActionResult> Create(Buillet buillet, int[] trains, int[] destinations)
         {
             await SetupViewBags();
             buillet.Trains = await TrainRepository.GetList(m => trains.Contains(m.Id));
             buillet.Destinations = await DestinationRepository.GetList(m => destinations.Contains(m.Id));
-           
+          
+            
 
             if (ModelState.IsValid)
             {
@@ -189,6 +191,9 @@ namespace Railway.Controllers
             await SetupViewBags();
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RechercheResultats(String Numero, String Titre)
         {
             var r = await BuilletRepository.ListAll();

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Railway.Core.Entities;
 using Railway.Core.Seedwork;
-using Railway.Infrastructure.Data;
 
 namespace Railway.API.Controllers
 {
@@ -28,7 +22,7 @@ namespace Railway.API.Controllers
         [HttpGet, Route("")]
         public async Task<ActionResult<List<Exemplaire>>> Index()
         {
-              return await Repository.IsEmpty() ? 
+              return !await Repository.IsEmpty() ? 
                           await Repository.ListAll() :
                           Problem("Entity set 'RailwayContext.Exemplaires'  is null.");
         }
@@ -74,15 +68,16 @@ namespace Railway.API.Controllers
         }
 
         
-        // POST: Exemplaires/Edit/5
+        // PUT: Exemplaires/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, Route ("Edit")]
+        [HttpPut, Route ("Edit")]
        
         public async Task<ActionResult<Exemplaire>> Edit(int id, string numero, int builletId)
         {
             Exemplaire exemplaire = new Exemplaire()
             {
+                Id= id,
                 NumeroInventaire = numero,
                 MiseEnService = DateTime.Now,
                 Buillet = await BuilletRepository.GetById(builletId)

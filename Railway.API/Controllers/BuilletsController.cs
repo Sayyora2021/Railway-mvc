@@ -10,7 +10,7 @@ namespace Railway.API.Controllers
     public class BuilletsController : ControllerBase
     {
         private readonly IBuilletRepository BuilletRepository;
-        private readonly IDestinationRepository DestinationReposioty;
+        private readonly IDestinationRepository DestinationRepository;
         private readonly IExemplaireRepository ExemplaireRepository;
         private readonly ITrainRepository TrainRepository;
 
@@ -18,7 +18,7 @@ namespace Railway.API.Controllers
         public BuilletsController(IBuilletRepository builletRepository, IDestinationRepository destinationRepository, IExemplaireRepository exemplaireRepository, ITrainRepository trainRepository)
         {
             BuilletRepository = builletRepository;
-            DestinationReposioty = destinationRepository;
+            DestinationRepository = destinationRepository;
             ExemplaireRepository = exemplaireRepository;
             TrainRepository = trainRepository;
         }
@@ -32,7 +32,7 @@ namespace Railway.API.Controllers
                 Problem("Entity set 'RailwayContext.Buillets'  is null.");
         }
 
-        // GET: Buillets1/Details/5
+        // GET: Buillets/Details/5
         [HttpGet, Route("Details/{id}")]
         public async Task<ActionResult<Buillet>> Details(int? id)
         {
@@ -52,11 +52,12 @@ namespace Railway.API.Controllers
         }
 
         
-        // POST: Buillets1/Create
+        // POST: Buillets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         
         [HttpPost, Route("Create")]
+       
         public async Task<ActionResult<Buillet>> Create([FromBody] ApiBuillet apiBuillet)
         {
             Buillet buillet = new Buillet();
@@ -82,11 +83,11 @@ namespace Railway.API.Controllers
         }
 
 
-        // POST: Buillets1/Edit/5
+        // POST: Buillets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPut, Route("Edit/{id}")]
+       
         public async Task<ActionResult<Buillet>> Edit(int id, [FromBody] ApiBuillet apiBuillet)
         {
 
@@ -107,7 +108,7 @@ namespace Railway.API.Controllers
          
         }
 
-        // GET: Buillets1/Delete/5
+        // POST: Buillets/Delete/5
         [HttpDelete, Route("Delete/{id}")]
         public async Task<ActionResult<Buillet>> DeleteConfirmed(int id)
         {
@@ -136,7 +137,7 @@ namespace Railway.API.Controllers
         {
             foreach (int destinationId in destinationsIds)
             {
-                Destination destination = await DestinationReposioty.GetById(destinationId);
+                Destination destination = await DestinationRepository.GetById(destinationId);
                 buillet.Destinations.Add(destination);
             }
 

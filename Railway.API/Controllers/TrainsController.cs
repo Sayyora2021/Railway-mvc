@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Railway.Core.Entities;
 using Railway.Core.Seedwork;
-using Railway.Infrastructure.Data;
+using System.Diagnostics;
 
 namespace Railway.API.Controllers
 {
@@ -68,49 +63,33 @@ namespace Railway.API.Controllers
         }
 
 
-        // POST: Trains/Edit/5
+        // PUT: Trains/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, Route("Edit")]
+        [HttpPut, Route("Edit/{id}")]
       
-        public async Task<ActionResult<Train>> Edit(int id, string numero, string nom)
+        public async Task<ActionResult<Train>> Edit(int id, [FromBody] ApiTrain apiTrain)
         {
-            Train train = new Train()
-            {
-                Id = id,
-                Numero = numero,
-                Nom = nom,
-                Buillets = new List<Buillet>()
-
-
-            };
-            if (id != 0)
-            {
-            
+                      
                 try
                 {
-                   
-                    await Repository.Update(train);
+                Train train = await Repository.GetById(id);
+                train.Numero = apiTrain.Numero;
+                train.Nom = apiTrain.Nom;
+                await Repository.Update(train);
+                return Ok();   
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!await TrainExists(train.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return train;
+                return Problem(ex.Message);
             }
-            return BadRequest();
-        }
+               
+            }
 
-        // GET: Trains/Delete/5
-        [HttpDelete, HttpDelete("Delete/{id}")]
-        public async Task<ActionResult<Train>> Delete(int id)
+
+        // DELETE: Trains/Delete/5
+        [HttpDelete, Route("Delete/{id}")]
+        public async Task<ActionResult<Train>> DeleteConfirmed(int id)
         {
             if (await Repository.IsEmpty())
             {
@@ -122,9 +101,13 @@ namespace Railway.API.Controllers
             if (train != null)
             {
                 await Repository.Delete(train);
+                return Ok();
             }
-
-            return train;
+            else
+            {
+                return Problem("Erreur effacement");
+            }
+           
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
@@ -134,4 +117,9 @@ namespace Railway.API.Controllers
         }
 
     }
+}
+public class ApiTrain
+{
+    public string Numero { get; set; }
+    public string Nom { get; set; }
 }

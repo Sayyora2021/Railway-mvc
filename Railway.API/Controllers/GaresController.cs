@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Railway.Core.Entities;
 using Railway.Core.Seedwork;
-using Railway.Infrastructure.Data;
 
 namespace Railway.API.Controllers
 {
@@ -22,16 +16,16 @@ namespace Railway.API.Controllers
             Repository = repository;
         }
 
-        // GET: Gares
+        // GET: api/Gares
         [HttpGet, Route("")]
         public async Task<ActionResult<List<Gare>>> Index()
         {
-              return await Repository.IsEmpty()? 
+              return !await Repository.IsEmpty()? 
                           await Repository.ListAll() :
                           Problem("Entity set 'RailwayContext.Gares'  is null.");
         }
 
-        // GET: Gares/Details/5
+        // GET: api/Gares/Details/5
         [HttpGet, Route("Details/{id}")]
         public async Task<ActionResult<Gare>> Details(int? id)
         {
