@@ -70,12 +70,12 @@ namespace Railway.Controllers
         {
             await SetupViewBags();
             exemplaire.Buillet= await BuilletRepository.GetById(builletId);
-            //if (ModelState.IsValid)
-            //{
+           if (ModelState.IsValid)
+            {
                 await Repository.Create(exemplaire);
                 return RedirectToAction(nameof(Index));
-            //}
-            //return View(exemplaire);
+            }
+            return View(exemplaire);
         }
 
         // GET: Exemplaires/Edit/5

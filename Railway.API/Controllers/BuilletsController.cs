@@ -162,7 +162,7 @@ public class ApiBuillet
     public string? Numero { get; set; }
     public string? Titre { get; set; }
 
-    public int[] destinationsIds { get; set; }
-    public int[] exemplairesIds { get; set; }
-    public int[] trainsIds { get; set; }
+    public int[] ?destinationsIds { get; set; } = null;
+    public int[]? exemplairesIds { get; set; } = null;
+    public int[]? trainsIds { get; set; } = null;
 }
