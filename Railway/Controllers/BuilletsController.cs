@@ -77,6 +77,10 @@ namespace Railway.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Buillet buillet, int[] trains, int[] destinations)
         {
+
+            //Console.WriteLine("Débogage : buillet = " + buillet.ToString());
+            //return ;
+
             await SetupViewBags();
             buillet.Trains = await TrainRepository.GetList(m => trains.Contains(m.Id));
             buillet.Destinations = await DestinationRepository.GetList(m => destinations.Contains(m.Id));
