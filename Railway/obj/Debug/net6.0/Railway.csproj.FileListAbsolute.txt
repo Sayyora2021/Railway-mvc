@@ -548,3 +548,4 @@ C:\workspace\Railway-mvc\Railway\obj\Debug\net6.0\refint\Railway.dll
 C:\workspace\Railway-mvc\Railway\obj\Debug\net6.0\Railway.pdb
 C:\workspace\Railway-mvc\Railway\obj\Debug\net6.0\Railway.genruntimeconfig.cache
 C:\workspace\Railway-mvc\Railway\obj\Debug\net6.0\ref\Railway.dll
+C:\workspace\Railway-mvc\Railway\bin\Debug\net6.0\Serilog.dll

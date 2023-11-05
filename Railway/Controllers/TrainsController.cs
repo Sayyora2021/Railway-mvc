@@ -1,19 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Railway.Core.Entities;
 using Railway.Core.Seedwork;
+using Railway.Infrastructure.Data;
 
 namespace Railway.Controllers
 {
     public class TrainsController : Controller
     {
         private readonly ITrainRepository Repository;
-
+       // private readonly IBuilletRepository BuilletRepository;
+        
         public TrainsController(ITrainRepository repository)
         {
             Repository = repository;
+           // this.BuilletRepository = builletRepository;
         }
+        //public async Task SetupViewBags()
+        //{
+        //    if (!await BuilletRepository.IsEmpty())
+        //    {
+        //        ViewBag.Buillets = new SelectList(await BuilletRepository.ListAll(), nameof(Buillet.Titre));
 
+        //    }
+        //}
         // GET: Trains
         public async Task<IActionResult> Index()
         {
@@ -49,16 +60,35 @@ namespace Railway.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //fonctionne
         public async Task<IActionResult> Create(Train train)
         {
             if (ModelState.IsValid)
             {
+
                 await Repository.Create(train);
                 return RedirectToAction(nameof(Index));
             }
             return View(train);
         }
+
+        //nouvelle version
+        //public async Task<IActionResult> Create(Train train, int billettId)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var buillet = await BuilletRepository.GetById(billettId);
+        //        if (buillet != null)
+        //        {
+        //            train.Buillets.Add(buillet);
+        //            await Repository.Create(train);
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //    }
+
+        //    return View(train);
+        //}
+
 
         // GET: Trains/Edit/5
         public async Task<IActionResult> Edit(int? id)

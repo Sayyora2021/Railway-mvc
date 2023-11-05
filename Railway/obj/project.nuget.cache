@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nrdqW/IcXM/qyvjI7zoVZ8S3Dc4q17+u8sCBl5nGu0nPl4IcA47g898gO1hc2UGXrfLJS/X7Rx8LNqkbvTp1lw==",
+  "dgSpecHash": "5WS5Gr1AvsUyco3dy2IRRiVGX6rIV3Z1HV8694EUf3D4N8mkh9GHwgjGmUzYjiMyFVrh8FCr7GX3WsCdV6jFkQ==",
   "success": true,
   "projectFilePath": "C:\\workspace\\Railway-mvc\\Railway\\Railway.csproj",
   "expectedPackageFiles": [
@@ -95,6 +95,7 @@
     "C:\\Users\\Sayyora\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Sayyora\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Sayyora\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\Sayyora\\.nuget\\packages\\serilog\\3.0.1\\serilog.3.0.1.nupkg.sha512",
     "C:\\Users\\Sayyora\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\Sayyora\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\Sayyora\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

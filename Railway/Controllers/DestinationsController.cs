@@ -15,6 +15,7 @@ namespace Railway.Controllers
         }
 
         // GET: Destinations
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await Repository.ListAll());
@@ -56,6 +57,13 @@ namespace Railway.Controllers
         {
             if (ModelState.IsValid)
             {
+                foreach(var modelState in ModelState.Values)
+                {
+                    foreach(var error in modelState.Errors)
+                    {
+                         Console.WriteLine($"Validation error : {error.ErrorMessage}");
+                    }
+                }
                 await Repository.Create(destination);
                 return RedirectToAction(nameof(Index));
             }
